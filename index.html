@@ -1,506 +1,268 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>DailyUseful - Free Online Calculators and Tools</title>
-
-  <meta name="description" content="Free online salary, loan repayment, discount, percentage and word count calculators. Simple tools for everyday life, work and personal finance.">
-
-  <meta name="keywords" content="free online calculators, salary calculator, compound interest calculator, loan repayment calculator, discount calculator, percentage calculator, word counter, Excel services">
-
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#5145cd">
-
-  <link rel="canonical" href="https://nelsonnjagi1997-max.github.io/dailyuseful/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online salary, loan, discount, percentage and word-count calculators. Simple tools for everyday life.">
+  <meta name="theme-color" content="#10243a">
+  <title>DailyUseful | Free Online Calculators</title>
   <link rel="stylesheet" href="style.css">
-
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-
-<header class="navbar">
-  <a class="logo" href="#home">DailyUseful<span>.</span></a>
-
-  <nav>
-    <a href="#tools">Calculators</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<main>
-
-  <!-- HERO SECTION -->
-  <section class="hero" id="home">
-    <span class="tag">FREE ONLINE TOOLS</span>
-
-    <h1>Make everyday calculations <span>easier.</span></h1>
-
-    <p>
-      Calculate loan repayments, salary balances, shopping discounts
-      and percentages. Use simple tools designed to save you time.
-    </p>
-
-    <a class="main-button" href="#tools">Explore the tools ↓</a>
-
-    <div class="trust-line">
-      Free to use · No account required · Mobile friendly
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#home">DailyUseful<span>.</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#tools">Calculators</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-
-  <!-- CURRENCY SELECTOR -->
-  <section class="calculator-section" id="currency">
-    <div class="calculator">
-      <span class="tag">DISPLAY SETTINGS</span>
-
-      <h2>Choose Your Currency</h2>
-
-      <p>
-        Choose how monetary results are displayed. This setting does
-        not convert amounts between currencies.
-      </p>
-
-      <label for="currency-select">Display currency</label>
-
-      <select id="currency-select">
-        <option value="KES">Kenyan Shilling (KSh)</option>
-        <option value="USD">US Dollar ($)</option>
-        <option value="GBP">British Pound (£)</option>
-        <option value="EUR">Euro (€)</option>
-        <option value="TZS">Tanzanian Shilling (TSh)</option>
-        <option value="UGX">Ugandan Shilling (USh)</option>
-        <option value="NGN">Nigerian Naira (₦)</option>
-        <option value="ZAR">South African Rand (R)</option>
-        <option value="INR">Indian Rupee (₹)</option>
-        <option value="CAD">Canadian Dollar (C$)</option>
-        <option value="AUD">Australian Dollar (A$)</option>
-      </select>
-
-      <p class="note">
-        For example, selecting USD changes the currency label and
-        formatting. It does not convert Kenyan shillings into dollars.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- TOOLS DIRECTORY -->
-  <section id="tools" class="tools-section">
-    <div class="section-heading">
-      <span class="tag">YOUR TOOLBOX</span>
-
-      <h2>What do you need to calculate?</h2>
-
-      <p>Choose a free tool and enter your numbers.</p>
-    </div>
-
-    <div class="tool-grid">
-
-      <a class="tool-card" href="#salary">
-        <div class="tool-icon">KSh</div>
-        <h3>Salary Calculator</h3>
-        <p>Estimate take-home pay after your deductions.</p>
-        <span>Calculate salary →</span>
-      </a>
-
-      <a class="tool-card" href="#loan">
-        <div class="tool-icon">↗</div>
-        <h3>Loan Calculator</h3>
-        <p>Estimate monthly repayments and total interest.</p>
-        <span>Calculate loan →</span>
-      </a>
-
-      <a class="tool-card" href="#discount">
-        <div class="tool-icon">%</div>
-        <h3>Discount Calculator</h3>
-        <p>Find sale prices and how much you save.</p>
-        <span>Calculate discount →</span>
-      </a>
-
-      <a class="tool-card" href="#percentage">
-        <div class="tool-icon">÷</div>
-        <h3>Percentage Calculator</h3>
-        <p>Calculate a percentage of any number.</p>
-        <span>Calculate percentage →</span>
-      </a>
-
-      <a class="tool-card" href="#word-counter">
-        <div class="tool-icon">Aa</div>
-        <h3>Word Counter</h3>
-        <p>Count words and characters in your text.</p>
-        <span>Count words →</span>
-      </a>
-
-      <a class="tool-card" href="#services">
-        <div class="tool-icon">✓</div>
-        <h3>Work Services</h3>
-        <p>Get help with spreadsheets, data entry and documents.</p>
-        <span>View services →</span>
-      </a>
-
-    </div>
-  </section>
-
-
-  <!-- SALARY CALCULATOR -->
-  <section class="calculator-section" id="salary">
-    <div class="calculator">
-      <span class="tag">PERSONAL FINANCE</span>
-
-      <h2>Salary Calculator</h2>
-
-      <p>Estimate your take-home pay after monthly deductions.</p>
-
-      <label for="gross-salary">Gross monthly salary</label>
-
-      <input
-        id="gross-salary"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="e.g. 50000"
-      >
-
-      <label for="salary-deductions">Total monthly deductions</label>
-
-      <input
-        id="salary-deductions"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="e.g. 8000"
-      >
-
-      <button type="button" onclick="calculateSalary()">
-        Calculate take-home pay
-      </button>
-
-      <div class="result" id="salary-result" aria-live="polite">
-        Your result will appear here.
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-content">
+        <span class="eyebrow">FREE ONLINE TOOLS</span>
+        <h1>Make everyday calculations easier.</h1>
+        <p>Calculate loan repayments, salary balances, shopping discounts and percentages. Use simple tools designed to save you time.</p>
+        <a class="button button-primary" href="#tools">Explore the tools ↓</a>
+        <p class="trust-line">Free to use · No account required · Mobile friendly</p>
       </div>
+    </section>
 
-      <p class="note">
-        Enter your total deductions yourself. This calculator does not
-        automatically calculate PAYE, NSSF, SHIF or other statutory
-        deductions. Results are estimates.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- LOAN CALCULATOR -->
-  <section class="calculator-section alternate" id="loan">
-    <div class="calculator">
-      <span class="tag">BORROWING</span>
-
-      <h2>Loan Repayment Calculator</h2>
-
-      <p>
-        Estimate monthly payments on a fixed-rate loan using monthly
-        repayment calculations.
-      </p>
-
-      <label for="loan-amount">Loan amount</label>
-
-      <input
-        id="loan-amount"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="e.g. 100000"
-      >
-
-      <label for="loan-rate">Annual interest rate (%)</label>
-
-      <input
-        id="loan-rate"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="e.g. 12"
-      >
-
-      <label for="loan-years">Loan term (years)</label>
-
-      <input
-        id="loan-years"
-        type="number"
-        min="0.1"
-        max="100"
-        step="0.1"
-        placeholder="e.g. 3"
-      >
-
-      <button type="button" onclick="calculateLoan()">
-        Calculate repayments
-      </button>
-
-      <div class="result" id="loan-result" aria-live="polite">
-        Your result will appear here.
-      </div>
-
-      <p class="note">
-        Assumes a fixed annual interest rate, divided into monthly
-        periods, with equal monthly payments. Excludes fees, insurance
-        and other lender charges. Actual loan terms may differ.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- DISCOUNT CALCULATOR -->
-  <section class="calculator-section" id="discount">
-    <div class="calculator">
-      <span class="tag">SHOPPING</span>
-
-      <h2>Discount Calculator</h2>
-
-      <p>Find the final price after a discount.</p>
-
-      <label for="original-price">Original price</label>
-
-      <input
-        id="original-price"
-        type="number"
-        min="0"
-        step="0.01"
-        placeholder="e.g. 2500"
-      >
-
-      <label for="discount-rate">Discount (%)</label>
-
-      <input
-        id="discount-rate"
-        type="number"
-        min="0"
-        max="100"
-        step="0.01"
-        placeholder="e.g. 20"
-      >
-
-      <button type="button" onclick="calculateDiscount()">
-        Calculate discount
-      </button>
-
-      <div class="result" id="discount-result" aria-live="polite">
-        Your result will appear here.
-      </div>
-    </div>
-  </section>
-
-
-  <!-- PERCENTAGE CALCULATOR -->
-  <section class="calculator-section alternate" id="percentage">
-    <div class="calculator">
-      <span class="tag">MATHEMATICS</span>
-
-      <h2>Percentage Calculator</h2>
-
-      <p>Calculate what percentage of a number you need.</p>
-
-      <label for="percent">Percentage (%)</label>
-
-      <input
-        id="percent"
-        type="number"
-        step="any"
-        placeholder="e.g. 15"
-      >
-
-      <label for="number">Number</label>
-
-      <input
-        id="number"
-        type="number"
-        step="any"
-        placeholder="e.g. 800"
-      >
-
-      <button type="button" onclick="calculatePercentage()">
-        Calculate percentage
-      </button>
-
-      <div class="result" id="result" aria-live="polite">
-        Your result will appear here.
-      </div>
-    </div>
-  </section>
-
-
-  <!-- WORD COUNTER -->
-  <section class="calculator-section" id="word-counter">
-    <div class="calculator">
-      <span class="tag">WRITING</span>
-
-      <h2>Word Counter</h2>
-
-      <p>Type or paste text to count words and characters.</p>
-
-      <label for="text-input">Your text</label>
-
-      <textarea
-        id="text-input"
-        rows="7"
-        placeholder="Start typing or paste your text here..."
-      ></textarea>
-
-      <div class="count-grid">
-        <div class="count-box">
-          Words
-          <strong id="word-count">0</strong>
+    <section class="currency-section">
+      <div class="container currency-panel">
+        <div>
+          <span class="eyebrow">DISPLAY SETTINGS</span>
+          <h2>Choose your currency</h2>
+          <p>Choose how monetary results are displayed. This does not convert exchange rates.</p>
         </div>
+        <label for="currency-select">Display currency
+          <select id="currency-select">
+            <option value="KES">Kenyan Shilling (KSh)</option>
+            <option value="USD">US Dollar ($)</option>
+            <option value="GBP">British Pound (£)</option>
+            <option value="EUR">Euro (€)</option>
+            <option value="TZS">Tanzanian Shilling (TSh)</option>
+            <option value="UGX">Ugandan Shilling (USh)</option>
+            <option value="NGN">Nigerian Naira (₦)</option>
+            <option value="ZAR">South African Rand (R)</option>
+            <option value="INR">Indian Rupee (₹)</option>
+            <option value="CAD">Canadian Dollar (C$)</option>
+            <option value="AUD">Australian Dollar (A$)</option>
+          </select>
+        </label>
+      </div>
+    </section>
 
-        <div class="count-box">
-          Characters
-          <strong id="char-count">0</strong>
+    <section class="section container" id="tools">
+      <div class="section-heading">
+        <span class="eyebrow">YOUR TOOLBOX</span>
+        <h2>What do you need to calculate?</h2>
+        <p>Choose a free tool and enter your numbers.</p>
+      </div>
+
+      <div class="tool-grid">
+        <a class="tool-card" href="#salary">
+          <span class="tool-icon">KSh</span>
+          <h3>Salary Calculator</h3>
+          <p>Estimate take-home pay after your deductions.</p>
+          <span class="card-link">Calculate salary →</span>
+        </a>
+        <a class="tool-card" href="#loan">
+          <span class="tool-icon">↗</span>
+          <h3>Loan Calculator</h3>
+          <p>Estimate monthly repayments and total interest.</p>
+          <span class="card-link">Calculate loan →</span>
+        </a>
+        <a class="tool-card" href="#discount">
+          <span class="tool-icon">%</span>
+          <h3>Discount Calculator</h3>
+          <p>Find sale prices and how much you save.</p>
+          <span class="card-link">Calculate discount →</span>
+        </a>
+        <a class="tool-card" href="#percentage">
+          <span class="tool-icon">÷</span>
+          <h3>Percentage Calculator</h3>
+          <p>Calculate a percentage of any number.</p>
+          <span class="card-link">Calculate percentage →</span>
+        </a>
+        <a class="tool-card" href="#word-counter">
+          <span class="tool-icon">Aa</span>
+          <h3>Word Counter</h3>
+          <p>Count words and characters in your text.</p>
+          <span class="card-link">Count words →</span>
+        </a>
+        <a class="tool-card" href="#services">
+          <span class="tool-icon">✓</span>
+          <h3>Work Services</h3>
+          <p>Get help with spreadsheets, data entry and documents.</p>
+          <span class="card-link">View services →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section calculator-section" id="salary">
+      <div class="container calculator-layout">
+        <div class="section-heading">
+          <span class="eyebrow">PERSONAL FINANCE</span>
+          <h2>Salary Calculator</h2>
+          <p>Estimate your take-home pay after monthly deductions.</p>
+        </div>
+        <form class="calculator-card" id="salary-form">
+          <label for="gross-salary">Gross monthly salary
+            <input id="gross-salary" name="gross-salary" type="number" min="0" step="any" placeholder="e.g. 50000" required>
+          </label>
+          <label for="salary-deductions">Total monthly deductions
+            <input id="salary-deductions" name="salary-deductions" type="number" min="0" step="any" placeholder="e.g. 8000" required>
+          </label>
+          <button class="button button-primary" type="submit">Calculate take-home pay</button>
+          <div class="result" id="salary-result" role="status" aria-live="polite">Your result will appear here.</div>
+          <p class="note">Enter your deductions yourself. This calculator does not automatically calculate PAYE, NSSF, SHIF or other statutory deductions.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section container" id="loan">
+      <div class="calculator-layout">
+        <div class="section-heading">
+          <span class="eyebrow">BORROWING</span>
+          <h2>Loan Repayment Calculator</h2>
+          <p>Estimate monthly payments on a fixed-rate loan.</p>
+        </div>
+        <form class="calculator-card" id="loan-form">
+          <label for="loan-amount">Loan amount
+            <input id="loan-amount" name="loan-amount" type="number" min="0.01" step="any" placeholder="e.g. 100000" required>
+          </label>
+          <label for="loan-rate">Annual interest rate (%)
+            <input id="loan-rate" name="loan-rate" type="number" min="0" max="1000" step="any" placeholder="e.g. 12" required>
+          </label>
+          <label for="loan-years">Loan term (years)
+            <input id="loan-years" name="loan-years" type="number" min="0.083333" max="100" step="any" placeholder="e.g. 3" required>
+          </label>
+          <button class="button button-primary" type="submit">Calculate repayments</button>
+          <div class="result" id="loan-result" role="status" aria-live="polite">Your result will appear here.</div>
+          <p class="note">Assumes equal monthly payments at a fixed annual rate. Fees, insurance and lender charges are excluded.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section calculator-section" id="discount">
+      <div class="container calculator-layout">
+        <div class="section-heading">
+          <span class="eyebrow">SHOPPING</span>
+          <h2>Discount Calculator</h2>
+          <p>Find the final price after a discount.</p>
+        </div>
+        <form class="calculator-card" id="discount-form">
+          <label for="original-price">Original price
+            <input id="original-price" name="original-price" type="number" min="0" step="any" placeholder="e.g. 2500" required>
+          </label>
+          <label for="discount-rate">Discount (%) 
+            <input id="discount-rate" name="discount-rate" type="number" min="0" max="100" step="any" placeholder="e.g. 20" required>
+          </label>
+          <button class="button button-primary" type="submit">Calculate discount</button>
+          <div class="result" id="discount-result" role="status" aria-live="polite">Your result will appear here.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section container" id="percentage">
+      <div class="calculator-layout">
+        <div class="section-heading">
+          <span class="eyebrow">MATHEMATICS</span>
+          <h2>Percentage Calculator</h2>
+          <p>Calculate what percentage of a number you need.</p>
+        </div>
+        <form class="calculator-card" id="percentage-form">
+          <label for="percent">Percentage (%)
+            <input id="percent" name="percent" type="number" step="any" placeholder="e.g. 20" required>
+          </label>
+          <label for="number">Number
+            <input id="number" name="number" type="number" step="any" placeholder="e.g. 500" required>
+          </label>
+          <button class="button button-primary" type="submit">Calculate percentage</button>
+          <div class="result" id="result" role="status" aria-live="polite">Your result will appear here.</div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section calculator-section" id="word-counter">
+      <div class="container calculator-layout">
+        <div class="section-heading">
+          <span class="eyebrow">WRITING</span>
+          <h2>Word Counter</h2>
+          <p>Type or paste text to count words and characters.</p>
+        </div>
+        <div class="calculator-card">
+          <label for="text-input">Your text
+            <textarea id="text-input" rows="7" placeholder="Start typing or paste your text here..."></textarea>
+          </label>
+          <div class="count-grid">
+            <div class="count-box"><span id="word-count">0</span><small>Words</small></div>
+            <div class="count-box"><span id="char-count">0</span><small>Characters</small></div>
+          </div>
+          <button class="button button-secondary" id="clear-text" type="button">Clear text</button>
         </div>
       </div>
+    </section>
 
-      <button
-        class="secondary-button"
-        type="button"
-        onclick="clearText()"
-      >
-        Clear text
-      </button>
+    <section class="section container" id="services">
+      <div class="section-heading">
+        <span class="eyebrow">PROFESSIONAL SERVICES</span>
+        <h2>Need help with your work?</h2>
+        <p>Practical support for spreadsheets, data entry and document formatting. Agree on the price before work begins.</p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card"><h3>Excel and Data Analysis</h3><p>Spreadsheet formulas, data cleaning, data organisation and simple reports.</p></article>
+        <article class="service-card"><h3>Data Entry</h3><p>Accurate entry and organisation of information in spreadsheets and documents.</p></article>
+        <article class="service-card"><h3>Document Formatting</h3><p>Clear, professional formatting of reports and business documents.</p></article>
+      </div>
+      <a class="button button-primary" href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Service%20Enquiry">Enquire about a service</a>
+    </section>
+
+    <section class="section about-section" id="about">
+      <div class="container narrow">
+        <span class="eyebrow">ABOUT DAILYUSEFUL</span>
+        <h2>Useful tools, without the hassle.</h2>
+        <p>DailyUseful brings everyday calculations into one simple place. Our goal is to make useful online tools accessible from any device without requiring visitors to create an account.</p>
+        <p class="note">Calculator results are estimates for general informational purposes. Check important financial calculations with the relevant bank, lender, employer or qualified adviser.</p>
+      </div>
+    </section>
+
+    <section class="section container" id="contact">
+      <div class="contact-panel">
+        <div>
+          <span class="eyebrow">GET IN TOUCH</span>
+          <h2>Contact DailyUseful</h2>
+          <p>Have a question, spotted an error or need help with a service? Send an email.</p>
+        </div>
+        <a class="button button-primary" href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Enquiry">Contact us by email</a>
+      </div>
+    </section>
+
+    <section class="section container" id="privacy">
+      <div class="narrow">
+        <span class="eyebrow">PRIVACY</span>
+        <h2>Your privacy matters</h2>
+        <p>The calculators are designed to process your entries in your browser. Avoid entering passwords, bank account details or other sensitive personal information.</p>
+        <p>If advertising, analytics or other third-party services are added later, this privacy information should be updated to explain their data practices accurately.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div><a class="brand footer-brand" href="#home">DailyUseful<span>.</span></a><p>Free online tools for everyday life.</p></div>
+      <div class="footer-links">
+        <a href="#about">About</a><a href="#tools">Calculators</a><a href="#services">Services</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a>
+      </div>
+      <p class="copyright">© <span id="current-year">2026</span> DailyUseful. All rights reserved.</p>
     </div>
-  </section>
-
-
-  <!-- SERVICES SECTION -->
-  <section id="services" class="about">
-    <span class="tag">PROFESSIONAL SERVICES</span>
-
-    <h2>Need help with your work?</h2>
-
-    <p>
-      I provide practical support with spreadsheets, data entry and
-      document formatting. Contact me to discuss your requirements
-      and agree on a price before work begins.
-    </p>
-
-    <div class="service-list">
-
-      <div class="service-item">
-        <h3>Excel and Data Analysis</h3>
-        <p>
-          Spreadsheet formulas, data cleaning, data organisation
-          and simple reports.
-        </p>
-      </div>
-
-      <div class="service-item">
-        <h3>Data Entry</h3>
-        <p>
-          Accurate entry and organisation of information in
-          spreadsheets and documents.
-        </p>
-      </div>
-
-      <div class="service-item">
-        <h3>Document Formatting</h3>
-        <p>
-          Clear, professional formatting of reports, assignments
-          and business documents.
-        </p>
-      </div>
-
-    </div>
-
-    <a
-      class="main-button"
-      href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Service%20Enquiry"
-    >
-      Enquire about a service
-    </a>
-  </section>
-
-
-  <!-- ABOUT SECTION -->
-  <section id="about" class="about">
-    <span class="tag">ABOUT DAILYUSEFUL</span>
-
-    <h2>Useful tools, without the hassle.</h2>
-
-    <p>
-      DailyUseful brings everyday calculations into one simple place.
-      Our goal is to make useful online tools accessible from any
-      device, without requiring visitors to create an account.
-    </p>
-
-    <p>
-      Calculator results are estimates intended for general
-      informational purposes. Check important financial calculations
-      with the relevant bank, lender, employer or qualified adviser.
-    </p>
-  </section>
-
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="about">
-    <span class="tag">GET IN TOUCH</span>
-
-    <h2>Contact DailyUseful</h2>
-
-    <p>
-      Have a question, spotted an error or need help with a service?
-      Send an email.
-    </p>
-
-    <a
-      class="main-button"
-      href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Enquiry"
-    >
-      Contact us by email
-    </a>
-  </section>
-
-
-  <!-- PRIVACY INFORMATION -->
-  <section id="privacy" class="about">
-    <span class="tag">PRIVACY</span>
-
-    <h2>Your privacy matters</h2>
-
-    <p>
-      The calculators are designed to process your entries in your
-      browser. Avoid entering passwords, bank account details or other
-      sensitive personal information.
-    </p>
-
-    <p>
-      If advertising, analytics or other third-party services are added
-      later, this privacy information should be updated to accurately
-      explain what information those services collect and how it is used.
-    </p>
-  </section>
-
-</main>
-
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 DailyUseful. All rights reserved.</p>
-
-  <p>Free online tools for everyday life.</p>
-
-  <p>
-    <a href="#about">About</a> ·
-    <a href="#tools">Calculators</a> ·
-    <a href="#services">Services</a> ·
-    <a href="#contact">Contact</a> ·
-    <a href="#privacy">Privacy</a>
-  </p>
-</footer>
-
-
-<script src="script.js"></script>
-
+  </footer>
 </body>
 </html>
-```
