@@ -5,12 +5,14 @@
 // DAILYUSEFUL - MAIN JAVASCRIPT
 // =====================================
 
-// Read and validate numeric input.
+// Safely read and validate numeric inputs.
 function readNumber(id, label, options = {}) {
   const element = document.getElementById(id);
 
   if (!element) {
-    throw new Error("A required calculator field could not be found.");
+    throw new Error(
+      `Input field "${id}" was not found. Check its HTML ID.`
+    );
   }
 
   const raw = element.value.trim();
@@ -26,7 +28,7 @@ function readNumber(id, label, options = {}) {
   }
 
   if (options.min !== undefined && value < options.min) {
-    throw new Error(`${label} cannot be less than ${options.min}.`);
+    throw new Error(`${label} must be at least ${options.min}.`);
   }
 
   if (options.max !== undefined && value > options.max) {
@@ -36,23 +38,22 @@ function readNumber(id, label, options = {}) {
   return value;
 }
 
-
 // =====================================
 // CURRENCY SETTINGS
 // =====================================
 
 const supportedCurrencies = {
-  KES: { locale: "en-KE", name: "Kenyan shillings" },
-  USD: { locale: "en-US", name: "US dollars" },
-  GBP: { locale: "en-GB", name: "British pounds" },
-  EUR: { locale: "en-IE", name: "euros" },
-  TZS: { locale: "en-TZ", name: "Tanzanian shillings" },
-  UGX: { locale: "en-UG", name: "Ugandan shillings" },
-  NGN: { locale: "en-NG", name: "Nigerian naira" },
-  ZAR: { locale: "en-ZA", name: "South African rand" },
-  INR: { locale: "en-IN", name: "Indian rupees" },
-  CAD: { locale: "en-CA", name: "Canadian dollars" },
-  AUD: { locale: "en-AU", name: "Australian dollars" }
+  KES: "en-KE",
+  USD: "en-US",
+  GBP: "en-GB",
+  EUR: "en-IE",
+  TZS: "en-TZ",
+  UGX: "en-UG",
+  NGN: "en-NG",
+  ZAR: "en-ZA",
+  INR: "en-IN",
+  CAD: "en-CA",
+  AUD: "en-AU"
 };
 
 let selectedCurrency = "KES";
@@ -62,29 +63,34 @@ function money(value) {
     ? selectedCurrency
     : "KES";
 
-  const locale = supportedCurrencies[currency].locale;
-
   try {
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency: currency,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(value);
+    return new Intl.NumberFormat(
+      supportedCurrencies[currency],
+      {
+        style: "currency",
+        currency: currency,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }
+    ).format(value);
   } catch (error) {
     return `${currency} ${Number(value).toFixed(2)}`;
   }
 }
 
-
-// Update the display currency when the visitor changes the selector.
-// This changes formatting only. It does not convert exchange rates.
 function setupCurrencySelector() {
   const selector = document.getElementById("currency-select");
 
-  if (!selector) return;
+  if (!selector) {
+    console.warn('Currency selector "#currency-select" was not found.');
+    return;
+  }
 
-  selector.value = selectedCurrency;
+  if (supportedCurrencies[selector.value]) {
+    selectedCurrency = selector.value;
+  } else {
+    selector.value = selectedCurrency;
+  }
 
   selector.addEventListener("change", function () {
     if (supportedCurrencies[selector.value]) {
@@ -93,19 +99,20 @@ function setupCurrencySelector() {
   });
 }
 
-
 // =====================================
-// RESULTS
+// DISPLAY RESULTS
 // =====================================
 
 function showResult(id, message) {
   const element = document.getElementById(id);
 
-  if (element) {
-    element.textContent = message;
+  if (!element) {
+    console.error(`Result element "#${id}" was not found.`);
+    return;
   }
-}
 
+  element.textContent = message;
+}
 
 // =====================================
 // 1. SALARY CALCULATOR
@@ -144,13 +151,9 @@ function calculateSalary() {
   }
 }
 
-
 // =====================================
-// 2. LOAN REPAYMENT CALCULATOR
+// 2. LOAN CALCULATOR
 // =====================================
-
-// Uses a fixed annual interest rate converted to a monthly rate,
-// with equal monthly repayments over the loan term.
 
 function calculateLoan() {
   try {
@@ -168,20 +171,17 @@ function calculateLoan() {
 
     const years = readNumber(
       "loan-years",
-      "the loan term",
+      "the loan term in years",
       { min: 0.1, max: 100 }
     );
 
     const months = Math.round(years * 12);
 
     if (months < 1) {
-      throw new Error(
-        "The loan term must be at least one month."
-      );
+      throw new Error("The loan term must be at least one month.");
     }
 
-    const monthlyRate = annualRate / 100 / 12;
-
+    const monthlyRate = annualRate / 1200;
     let payment;
 
     if (monthlyRate === 0) {
@@ -190,9 +190,11 @@ function calculateLoan() {
       const factor = Math.pow(1 + monthlyRate, months);
 
       payment =
-        principal *
-        (monthlyRate * factor) /
-        (factor - 1);
+        principal * monthlyRate * factor / (factor - 1);
+    }
+
+    if (!Number.isFinite(payment)) {
+      throw new Error("Unable to calculate the repayment. Check your inputs.");
     }
 
     const totalPaid = payment * months;
@@ -209,7 +211,6 @@ function calculateLoan() {
     showResult("loan-result", error.message);
   }
 }
-
 
 // =====================================
 // 3. DISCOUNT CALCULATOR
@@ -244,22 +245,14 @@ function calculateDiscount() {
   }
 }
 
-
 // =====================================
 // 4. PERCENTAGE CALCULATOR
 // =====================================
 
 function calculatePercentage() {
   try {
-    const percent = readNumber(
-      "percent",
-      "the percentage"
-    );
-
-    const number = readNumber(
-      "number",
-      "the number"
-    );
+    const percent = readNumber("percent", "the percentage");
+    const number = readNumber("number", "the number");
 
     const answer = percent / 100 * number;
 
@@ -275,16 +268,11 @@ function calculatePercentage() {
   }
 }
 
-
 // =====================================
 // 5. WORD AND CHARACTER COUNTER
 // =====================================
 
-const textInput = document.getElementById("text-input");
-
-if (textInput) {
-  textInput.addEventListener("input", updateTextCounts);
-}
+let textInput = null;
 
 function updateTextCounts() {
   if (!textInput) return;
@@ -300,30 +288,68 @@ function updateTextCounts() {
   const charCount = document.getElementById("char-count");
 
   if (wordCount) {
-    wordCount.textContent =
-      words.toLocaleString("en-KE");
+    wordCount.textContent = words.toLocaleString("en-KE");
   }
 
   if (charCount) {
-    charCount.textContent =
-      value.length.toLocaleString("en-KE");
+    charCount.textContent = value.length.toLocaleString("en-KE");
   }
 }
 
 function clearText() {
-  if (!textInput) return;
+  if (!textInput) {
+    textInput = document.getElementById("text-input");
+  }
+
+  if (!textInput) {
+    console.error('Text area "#text-input" was not found.');
+    return;
+  }
 
   textInput.value = "";
   updateTextCounts();
 }
 
+// =====================================
+// MAKE FUNCTIONS AVAILABLE TO HTML
+// =====================================
+
+// This supports buttons using onclick="calculateSalary()",
+// onclick="calculateLoan()", and similar HTML attributes.
+window.calculateSalary = calculateSalary;
+window.calculateLoan = calculateLoan;
+window.calculateDiscount = calculateDiscount;
+window.calculatePercentage = calculatePercentage;
+window.updateTextCounts = updateTextCounts;
+window.clearText = clearText;
 
 // =====================================
-// INITIALISE THE WEBSITE
+// INITIALISE AFTER THE PAGE LOADS
 // =====================================
 
-document.addEventListener("DOMContentLoaded", function () {
+function initialiseDailyUseful() {
   setupCurrencySelector();
+
+  textInput = document.getElementById("text-input");
+
+  if (textInput) {
+    textInput.addEventListener("input", updateTextCounts);
+  } else {
+    console.warn('Text area "#text-input" was not found.');
+  }
+
   updateTextCounts();
-});
+
+  console.log("DailyUseful JavaScript loaded successfully.");
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener(
+    "DOMContentLoaded",
+    initialiseDailyUseful,
+    { once: true }
+  );
+} else {
+  initialiseDailyUseful();
+}
 ```
