@@ -1,321 +1,159 @@
-```javascript
+
 "use strict";
 
-// =====================================
-// DAILYUSEFUL - MAIN JAVASCRIPT
-// =====================================
+function getValue(id) {
+  const input = document.getElementById(id);
 
-// Safely read and validate numeric inputs.
-function readNumber(id, label, options = {}) {
-  const element = document.getElementById(id);
-
-  if (!element) {
-    throw new Error(
-      `Input field "${id}" was not found. Check its HTML ID.`
-    );
+  if (!input) {
+    throw new Error("Missing input: " + id);
   }
 
-  const raw = element.value.trim();
+  const value = input.value.trim();
 
-  if (raw === "") {
-    throw new Error(`Please enter ${label}.`);
+  if (value === "") {
+    throw new Error("Please fill in all required fields.");
   }
 
-  const value = Number(raw);
+  const number = Number(value);
 
-  if (!Number.isFinite(value)) {
-    throw new Error(`Please enter a valid ${label}.`);
+  if (!Number.isFinite(number)) {
+    throw new Error("Please enter valid numbers.");
   }
 
-  if (options.min !== undefined && value < options.min) {
-    throw new Error(`${label} must be at least ${options.min}.`);
-  }
-
-  if (options.max !== undefined && value > options.max) {
-    throw new Error(`${label} cannot exceed ${options.max}.`);
-  }
-
-  return value;
+  return number;
 }
 
-// =====================================
-// CURRENCY SETTINGS
-// =====================================
+function showResult(id, message) {
+  const output = document.getElementById(id);
 
-const supportedCurrencies = {
-  KES: "en-KE",
-  USD: "en-US",
-  GBP: "en-GB",
-  EUR: "en-IE",
-  TZS: "en-TZ",
-  UGX: "en-UG",
-  NGN: "en-NG",
-  ZAR: "en-ZA",
-  INR: "en-IN",
-  CAD: "en-CA",
-  AUD: "en-AU"
-};
-
-let selectedCurrency = "KES";
+  if (output) {
+    output.textContent = message;
+  }
+}
 
 function money(value) {
-  const currency = supportedCurrencies[selectedCurrency]
-    ? selectedCurrency
-    : "KES";
-
-  try {
-    return new Intl.NumberFormat(
-      supportedCurrencies[currency],
-      {
-        style: "currency",
-        currency: currency,
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      }
-    ).format(value);
-  } catch (error) {
-    return `${currency} ${Number(value).toFixed(2)}`;
-  }
-}
-
-function setupCurrencySelector() {
-  const selector = document.getElementById("currency-select");
-
-  if (!selector) {
-    console.warn('Currency selector "#currency-select" was not found.');
-    return;
-  }
-
-  if (supportedCurrencies[selector.value]) {
-    selectedCurrency = selector.value;
-  } else {
-    selector.value = selectedCurrency;
-  }
-
-  selector.addEventListener("change", function () {
-    if (supportedCurrencies[selector.value]) {
-      selectedCurrency = selector.value;
-    }
+  return "KSh " + value.toLocaleString("en-KE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   });
 }
 
-// =====================================
-// DISPLAY RESULTS
-// =====================================
-
-function showResult(id, message) {
-  const element = document.getElementById(id);
-
-  if (!element) {
-    console.error(`Result element "#${id}" was not found.`);
-    return;
-  }
-
-  element.textContent = message;
-}
-
-// =====================================
-// 1. SALARY CALCULATOR
-// =====================================
-
 function calculateSalary() {
   try {
-    const gross = readNumber(
-      "gross-salary",
-      "your gross salary",
-      { min: 0 }
-    );
+    const salary = getValue("gross-salary");
+    const deductions = getValue("salary-deductions");
 
-    const deductions = readNumber(
-      "salary-deductions",
-      "your total deductions",
-      { min: 0 }
-    );
-
-    if (deductions > gross) {
-      throw new Error(
-        "Deductions cannot exceed your gross salary."
-      );
+    if (salary < 0 || deductions < 0) {
+      throw new Error("Amounts cannot be negative.");
     }
 
-    const net = gross - deductions;
-    const annualNet = net * 12;
+    if (deductions > salary) {
+      throw new Error("Deductions cannot exceed salary.");
+    }
 
     showResult(
       "salary-result",
-      `Estimated monthly take-home pay: ${money(net)}. ` +
-      `Estimated annual take-home pay: ${money(annualNet)}.`
+      "Take-home pay: " + money(salary - deductions)
     );
   } catch (error) {
     showResult("salary-result", error.message);
   }
 }
 
-// =====================================
-// 2. LOAN CALCULATOR
-// =====================================
-
 function calculateLoan() {
   try {
-    const principal = readNumber(
-      "loan-amount",
-      "the loan amount",
-      { min: 0.01 }
-    );
+    const principal = getValue("loan-amount");
+    const annualRate = getValue("loan-rate");
+    const years = getValue("loan-years");
 
-    const annualRate = readNumber(
-      "loan-rate",
-      "the annual interest rate",
-      { min: 0, max: 1000 }
-    );
-
-    const years = readNumber(
-      "loan-years",
-      "the loan term in years",
-      { min: 0.1, max: 100 }
-    );
+    if (principal <= 0 || annualRate < 0 || years <= 0) {
+      throw new Error("Enter a positive loan amount and term, and a non-negative interest rate.");
+    }
 
     const months = Math.round(years * 12);
+    const rate = annualRate / 1200;
 
-    if (months < 1) {
-      throw new Error("The loan term must be at least one month.");
-    }
-
-    const monthlyRate = annualRate / 1200;
-    let payment;
-
-    if (monthlyRate === 0) {
-      payment = principal / months;
-    } else {
-      const factor = Math.pow(1 + monthlyRate, months);
-
-      payment =
-        principal * monthlyRate * factor / (factor - 1);
-    }
-
-    if (!Number.isFinite(payment)) {
-      throw new Error("Unable to calculate the repayment. Check your inputs.");
-    }
-
-    const totalPaid = payment * months;
-    const totalInterest = totalPaid - principal;
+    const payment = rate === 0
+      ? principal / months
+      : principal * rate * Math.pow(1 + rate, months) /
+        (Math.pow(1 + rate, months) - 1);
 
     showResult(
       "loan-result",
-      `Estimated monthly payment: ${money(payment)}. ` +
-      `Total repayment: ${money(totalPaid)}. ` +
-      `Estimated total interest: ${money(totalInterest)}. ` +
-      `Loan term: ${months} months.`
+      "Monthly payment: " + money(payment) +
+      " | Total repayment: " + money(payment * months)
     );
   } catch (error) {
     showResult("loan-result", error.message);
   }
 }
 
-// =====================================
-// 3. DISCOUNT CALCULATOR
-// =====================================
-
 function calculateDiscount() {
   try {
-    const price = readNumber(
-      "original-price",
-      "the original price",
-      { min: 0 }
-    );
+    const price = getValue("original-price");
+    const discount = getValue("discount-rate");
 
-    const rate = readNumber(
-      "discount-rate",
-      "the discount percentage",
-      { min: 0, max: 100 }
-    );
+    if (price < 0 || discount < 0 || discount > 100) {
+      throw new Error("Price must be non-negative and discount must be 0–100%.");
+    }
 
-    const savings = price * rate / 100;
-    const finalPrice = price - savings;
+    const savings = price * discount / 100;
 
     showResult(
       "discount-result",
-      `Original price: ${money(price)}. ` +
-      `Discount: ${rate}%. ` +
-      `You save: ${money(savings)}. ` +
-      `Final sale price: ${money(finalPrice)}.`
+      "Final price: " + money(price - savings) +
+      " | You save: " + money(savings)
     );
   } catch (error) {
     showResult("discount-result", error.message);
   }
 }
 
-// =====================================
-// 4. PERCENTAGE CALCULATOR
-// =====================================
-
 function calculatePercentage() {
   try {
-    const percent = readNumber("percent", "the percentage");
-    const number = readNumber("number", "the number");
-
-    const answer = percent / 100 * number;
+    const percentage = getValue("percent");
+    const number = getValue("number");
 
     showResult(
       "result",
-      `${percent}% of ${number.toLocaleString("en-KE")} = ` +
-      answer.toLocaleString("en-KE", {
-        maximumFractionDigits: 8
-      })
+      percentage + "% of " + number + " = " +
+      (percentage / 100 * number).toLocaleString("en-KE")
     );
   } catch (error) {
     showResult("result", error.message);
   }
 }
 
-// =====================================
-// 5. WORD AND CHARACTER COUNTER
-// =====================================
-
-let textInput = null;
-
 function updateTextCounts() {
-  if (!textInput) return;
+  const input = document.getElementById("text-input");
+  if (!input) return;
 
-  const value = textInput.value;
-  const trimmed = value.trim();
+  const text = input.value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
 
-  const words = trimmed === ""
-    ? 0
-    : trimmed.split(/\s+/u).length;
-
-  const wordCount = document.getElementById("word-count");
-  const charCount = document.getElementById("char-count");
-
-  if (wordCount) {
-    wordCount.textContent = words.toLocaleString("en-KE");
-  }
-
-  if (charCount) {
-    charCount.textContent = value.length.toLocaleString("en-KE");
-  }
+  document.getElementById("word-count").textContent = words;
+  document.getElementById("char-count").textContent =
+    input.value.length;
 }
 
 function clearText() {
-  if (!textInput) {
-    textInput = document.getElementById("text-input");
-  }
+  const input = document.getElementById("text-input");
+  if (!input) return;
 
-  if (!textInput) {
-    console.error('Text area "#text-input" was not found.');
-    return;
-  }
-
-  textInput.value = "";
+  input.value = "";
   updateTextCounts();
 }
 
-// =====================================
-// MAKE FUNCTIONS AVAILABLE TO HTML
-// =====================================
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("text-input");
 
-// This supports buttons using onclick="calculateSalary()",
-// onclick="calculateLoan()", and similar HTML attributes.
+  if (input) {
+    input.addEventListener("input", updateTextCounts);
+  }
+
+  updateTextCounts();
+});
+
 window.calculateSalary = calculateSalary;
 window.calculateLoan = calculateLoan;
 window.calculateDiscount = calculateDiscount;
@@ -323,33 +161,4 @@ window.calculatePercentage = calculatePercentage;
 window.updateTextCounts = updateTextCounts;
 window.clearText = clearText;
 
-// =====================================
-// INITIALISE AFTER THE PAGE LOADS
-// =====================================
-
-function initialiseDailyUseful() {
-  setupCurrencySelector();
-
-  textInput = document.getElementById("text-input");
-
-  if (textInput) {
-    textInput.addEventListener("input", updateTextCounts);
-  } else {
-    console.warn('Text area "#text-input" was not found.');
-  }
-
-  updateTextCounts();
-
-  console.log("DailyUseful JavaScript loaded successfully.");
-}
-
-if (document.readyState === "loading") {
-  document.addEventListener(
-    "DOMContentLoaded",
-    initialiseDailyUseful,
-    { once: true }
-  );
-} else {
-  initialiseDailyUseful();
-}
-```
+console.log("DailyUseful calculators loaded.");
