@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="EverydayTools offers free online calculators, word counters, grade calculators and useful everyday tools.">
+    <meta name="keywords" content="free online tools, percentage calculator, word counter, grade calculator">
+    <meta name="author" content="EverydayTools">
+
+    <title>EverydayTools | Free Online Tools</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Everyday<span>Tools</span></a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#tools">Tools</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <p class="eyebrow">SIMPLE. FREE. USEFUL.</p>
+
+            <h1>Everyday tools.<br>
+                <span>Made simple.</span>
+            </h1>
+
+            <p class="hero-text">
+                Calculate, count and solve everyday problems with
+                free online tools. No downloads required.
+            </p>
+
+            <a href="#tools" class="primary-button">Explore tools →</a>
+
+            <div class="hero-stats">
+                <div>
+                    <strong>Free</strong>
+                    <small>To use</small>
+                </div>
+                <div>
+                    <strong>Fast</strong>
+                    <small>Results</small>
+                </div>
+                <div>
+                    <strong>Online</strong>
+                    <small>Anywhere</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-section" id="tools">
+            <div class="section-heading">
+                <p class="eyebrow">OUR TOOLKIT</p>
+                <h2>What do you need today?</h2>
+                <p>Choose a tool and get your answer in seconds.</p>
+            </div>
+
+            <div class="search-box">
+                <input
+                    type="search"
+                    id="toolSearch"
+                    placeholder="Search tools..."
+                    aria-label="Search tools"
+                >
+            </div>
+
+            <div class="tool-grid">
+
+                <article class="tool-card" data-search="percentage calculator maths">
+                    <div class="tool-icon">%</div>
+                    <h3>Percentage Calculator</h3>
+                    <p>Calculate percentages and find what percentage one number is of another.</p>
+                    <button class="tool-button" data-tool="percentage">Open calculator →</button>
+                </article>
+
+                <article class="tool-card" data-search="word counter writing text characters">
+                    <div class="tool-icon">Aa</div>
+                    <h3>Word Counter</h3>
+                    <p>Count words, characters and sentences in your text instantly.</p>
+                    <button class="tool-button" data-tool="words">Open counter →</button>
+                </article>
+
+                <article class="tool-card" data-search="grade calculator marks average student">
+                    <div class="tool-icon">✓</div>
+                    <h3>Grade Calculator</h3>
+                    <p>Calculate your average marks from your subject scores.</p>
+                    <button class="tool-button" data-tool="grades">Open calculator →</button>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="workspace" id="workspace" hidden>
+            <div class="workspace-heading">
+                <div>
+                    <p class="eyebrow">YOUR SELECTED TOOL</p>
+                    <h2 id="workspaceTitle">Calculator</h2>
+                </div>
+
+                <button id="closeTool" class="close-button">Close ×</button>
+            </div>
+
+            <div id="percentageTool" class="tool-panel" hidden>
+                <h3>Find a percentage</h3>
+
+                <label for="percentageValue">Percentage (%)</label>
+                <input type="number" id="percentageValue" placeholder="e.g. 15">
+
+                <label for="percentageNumber">Number</label>
+                <input type="number" id="percentageNumber" placeholder="e.g. 200">
+
+                <button id="calculatePercentage" class="primary-button">Calculate</button>
+                <p id="percentageResult" class="result" aria-live="polite"></p>
+
+                <hr>
+
+                <h3>Find what percentage one number is of another</h3>
+
+                <label for="partValue">Part</label>
+                <input type="number" id="partValue" placeholder="e.g. 25">
+
+                <label for="totalValue">Total</label>
+                <input type="number" id="totalValue" placeholder="e.g. 100">
+
+                <button id="calculatePart" class="primary-button">Calculate percentage</button>
+                <p id="partResult" class="result" aria-live="polite"></p>
+            </div>
+
+            <div id="wordsTool" class="tool-panel" hidden>
+                <h3>Enter or paste your text</h3>
+
+                <textarea id="wordText" rows="8"
+                    placeholder="Start typing or paste your text here..."></textarea>
+
+                <div class="counter-grid">
+                    <div class="counter-item">
+                        <strong id="wordCount">0</strong>
+                        <span>Words</span>
+                    </div>
+
+                    <div class="counter-item">
+                        <strong id="characterCount">0</strong>
+                        <span>Characters</span>
+                    </div>
+
+                    <div class="counter-item">
+                        <strong id="sentenceCount">0</strong>
+                        <span>Sentences</span>
+                    </div>
+                </div>
+
+                <button id="clearText" class="secondary-button">Clear text</button>
+            </div>
+
+            <div id="gradesTool" class="tool-panel" hidden>
+                <h3>Calculate your average</h3>
+                <p>Enter your marks below. Each subject is weighted equally.</p>
+
+                <div id="subjectList">
+                    <div class="subject-row">
+                        <label for="subject1">Subject 1 mark (%)</label>
+                        <input id="subject1" class="subject-mark" type="number"
+                            min="0" max="100" placeholder="e.g. 75">
+                    </div>
+
+                    <div class="subject-row">
+                        <label for="subject2">Subject 2 mark (%)</label>
+                        <input id="subject2" class="subject-mark" type="number"
+                            min="0" max="100" placeholder="e.g. 80">
+                    </div>
+
+                    <div class="subject-row">
+                        <label for="subject3">Subject 3 mark (%)</label>
+                        <input id="subject3" class="subject-mark" type="number"
+                            min="0" max="100" placeholder="e.g. 65">
+                    </div>
+                </div>
+
+                <button id="calculateGrade" class="primary-button">Calculate average</button>
+                <p id="gradeResult" class="result" aria-live="polite"></p>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <p class="eyebrow">ABOUT EVERYDAYTOOLS</p>
+            <h2>Useful tools for everyday life.</h2>
+            <p>
+                Our goal is to make common tasks easier with simple,
+                accessible tools that work on computers, tablets and phones.
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <a href="#" class="logo">Everyday<span>Tools</span></a>
+        <p>Simple tools to make everyday tasks easier.</p>
+        <p>© <span id="currentYear"></span> EverydayTools</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
