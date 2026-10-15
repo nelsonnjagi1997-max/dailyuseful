@@ -265,3 +265,242 @@
       <label for="original-price">Original price</label>
 
       <input
+        id="original-price"
+        type="number"
+        min="0"
+        step="0.01"
+        placeholder="e.g. 2500"
+      >
+
+      <label for="discount-rate">Discount (%)</label>
+
+      <input
+        id="discount-rate"
+        type="number"
+        min="0"
+        max="100"
+        step="0.01"
+        placeholder="e.g. 20"
+      >
+
+      <button type="button" onclick="calculateDiscount()">
+        Calculate discount
+      </button>
+
+      <div class="result" id="discount-result" aria-live="polite">
+        Your result will appear here.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PERCENTAGE CALCULATOR -->
+  <section class="calculator-section alternate" id="percentage">
+    <div class="calculator">
+      <span class="tag">MATHEMATICS</span>
+
+      <h2>Percentage Calculator</h2>
+
+      <p>Calculate what percentage of a number you need.</p>
+
+      <label for="percent">Percentage (%)</label>
+
+      <input
+        id="percent"
+        type="number"
+        step="any"
+        placeholder="e.g. 15"
+      >
+
+      <label for="number">Number</label>
+
+      <input
+        id="number"
+        type="number"
+        step="any"
+        placeholder="e.g. 800"
+      >
+
+      <button type="button" onclick="calculatePercentage()">
+        Calculate percentage
+      </button>
+
+      <div class="result" id="result" aria-live="polite">
+        Your result will appear here.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- WORD COUNTER -->
+  <section class="calculator-section" id="word-counter">
+    <div class="calculator">
+      <span class="tag">WRITING</span>
+
+      <h2>Word Counter</h2>
+
+      <p>Type or paste text to count words and characters.</p>
+
+      <label for="text-input">Your text</label>
+
+      <textarea
+        id="text-input"
+        rows="7"
+        placeholder="Start typing or paste your text here..."
+      ></textarea>
+
+      <div class="count-grid">
+        <div class="count-box">
+          Words
+          <strong id="word-count">0</strong>
+        </div>
+
+        <div class="count-box">
+          Characters
+          <strong id="char-count">0</strong>
+        </div>
+      </div>
+
+      <button
+        class="secondary-button"
+        type="button"
+        onclick="clearText()"
+      >
+        Clear text
+      </button>
+    </div>
+  </section>
+
+
+  <!-- SERVICES SECTION -->
+  <section id="services" class="about">
+    <span class="tag">PROFESSIONAL SERVICES</span>
+
+    <h2>Need help with your work?</h2>
+
+    <p>
+      I provide practical support with spreadsheets, data entry and
+      document formatting. Contact me to discuss your requirements
+      and agree on a price before work begins.
+    </p>
+
+    <div class="service-list">
+
+      <div class="service-item">
+        <h3>Excel and Data Analysis</h3>
+        <p>
+          Spreadsheet formulas, data cleaning, data organisation
+          and simple reports.
+        </p>
+      </div>
+
+      <div class="service-item">
+        <h3>Data Entry</h3>
+        <p>
+          Accurate entry and organisation of information in
+          spreadsheets and documents.
+        </p>
+      </div>
+
+      <div class="service-item">
+        <h3>Document Formatting</h3>
+        <p>
+          Clear, professional formatting of reports, assignments
+          and business documents.
+        </p>
+      </div>
+
+    </div>
+
+    <a
+      class="main-button"
+      href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Service%20Enquiry"
+    >
+      Enquire about a service
+    </a>
+  </section>
+
+
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <span class="tag">ABOUT DAILYUSEFUL</span>
+
+    <h2>Useful tools, without the hassle.</h2>
+
+    <p>
+      DailyUseful brings everyday calculations into one simple place.
+      Our goal is to make useful online tools accessible from any
+      device, without requiring visitors to create an account.
+    </p>
+
+    <p>
+      Calculator results are estimates intended for general
+      informational purposes. Check important financial calculations
+      with the relevant bank, lender, employer or qualified adviser.
+    </p>
+  </section>
+
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="about">
+    <span class="tag">GET IN TOUCH</span>
+
+    <h2>Contact DailyUseful</h2>
+
+    <p>
+      Have a question, spotted an error or need help with a service?
+      Send an email.
+    </p>
+
+    <a
+      class="main-button"
+      href="mailto:nelsonnjagi1997@gmail.com?subject=DailyUseful%20Enquiry"
+    >
+      Contact us by email
+    </a>
+  </section>
+
+
+  <!-- PRIVACY INFORMATION -->
+  <section id="privacy" class="about">
+    <span class="tag">PRIVACY</span>
+
+    <h2>Your privacy matters</h2>
+
+    <p>
+      The calculators are designed to process your entries in your
+      browser. Avoid entering passwords, bank account details or other
+      sensitive personal information.
+    </p>
+
+    <p>
+      If advertising, analytics or other third-party services are added
+      later, this privacy information should be updated to accurately
+      explain what information those services collect and how it is used.
+    </p>
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 DailyUseful. All rights reserved.</p>
+
+  <p>Free online tools for everyday life.</p>
+
+  <p>
+    <a href="#about">About</a> ·
+    <a href="#tools">Calculators</a> ·
+    <a href="#services">Services</a> ·
+    <a href="#contact">Contact</a> ·
+    <a href="#privacy">Privacy</a>
+  </p>
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+```
