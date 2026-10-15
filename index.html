@@ -1,211 +1,168 @@
-
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="EverydayTools offers free online calculators, word counters, grade calculators and useful everyday tools.">
-    <meta name="keywords" content="free online tools, percentage calculator, word counter, grade calculator">
-    <meta name="author" content="EverydayTools">
+  <title>DailyUseful - Free Online Calculators</title>
+  <meta name="description" content="Use free online salary, loan repayment, discount, percentage and word count calculators. Simple tools for everyday life.">
+  <meta name="keywords" content="free online calculators, salary calculator, loan calculator, discount calculator, percentage calculator, word counter">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#5145cd">
+  <link rel="canonical" href="https://nelsonnjagi1997-max.github.io/dailyuseful/">
+  <link rel="stylesheet" href="style.css">
 
-    <title>EverydayTools | Free Online Tools</title>
-
-    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <header class="header">
-        <a href="#" class="logo">Everyday<span>Tools</span></a>
+<header class="navbar">
+  <a class="logo" href="#">DailyUseful<span>.</span></a>
+  <nav>
+    <a href="#tools">Calculators</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
 
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#tools">Tools</a>
-            <a href="#about">About</a>
-        </nav>
-    </header>
+<main>
+  <section class="hero">
+    <span class="tag">FREE ONLINE TOOLS</span>
+    <h1>Make everyday calculations <span>easier.</span></h1>
+    <p>Calculate your salary, loan payments, shopping discounts and more. Fast, free and easy to use.</p>
+    <a class="main-button" href="#tools">Explore the tools ↓</a>
+    <div class="trust-line">Free to use · No account required · Mobile friendly</div>
+  </section>
 
-    <main>
-        <section class="hero" id="home">
-            <p class="eyebrow">SIMPLE. FREE. USEFUL.</p>
+  <section id="tools" class="tools-section">
+    <div class="section-heading">
+      <span class="tag">YOUR TOOLBOX</span>
+      <h2>What do you need to calculate?</h2>
+      <p>Choose a tool and enter your numbers.</p>
+    </div>
 
-            <h1>Everyday tools.<br>
-                <span>Made simple.</span>
-            </h1>
+    <div class="tool-grid">
+      <a class="tool-card" href="#salary">
+        <div class="tool-icon">KSh</div>
+        <h3>Salary Calculator</h3>
+        <p>Estimate take-home pay after your deductions.</p>
+        <span>Calculate salary →</span>
+      </a>
+      <a class="tool-card" href="#loan">
+        <div class="tool-icon">↗</div>
+        <h3>Loan Calculator</h3>
+        <p>Estimate monthly repayments and loan interest.</p>
+        <span>Calculate loan →</span>
+      </a>
+      <a class="tool-card" href="#discount">
+        <div class="tool-icon">%</div>
+        <h3>Discount Calculator</h3>
+        <p>Find sale prices and how much you save.</p>
+        <span>Calculate discount →</span>
+      </a>
+      <a class="tool-card" href="#percentage">
+        <div class="tool-icon">÷</div>
+        <h3>Percentage Calculator</h3>
+        <p>Calculate a percentage of any number.</p>
+        <span>Calculate percentage →</span>
+      </a>
+      <a class="tool-card" href="#word-counter">
+        <div class="tool-icon">Aa</div>
+        <h3>Word Counter</h3>
+        <p>Count words and characters in your text.</p>
+        <span>Count words →</span>
+      </a>
+    </div>
+  </section>
 
-            <p class="hero-text">
-                Calculate, count and solve everyday problems with
-                free online tools. No downloads required.
-            </p>
+  <section class="calculator-section" id="salary">
+    <div class="calculator">
+      <span class="tag">PERSONAL FINANCE</span>
+      <h2>Salary Calculator</h2>
+      <p>Estimate your take-home pay in Kenyan shillings (KSh).</p>
+      <label for="gross-salary">Gross monthly salary (KSh)</label>
+      <input id="gross-salary" type="number" min="0" step="0.01" placeholder="e.g. 50000">
+      <label for="salary-deductions">Total monthly deductions (KSh)</label>
+      <input id="salary-deductions" type="number" min="0" step="0.01" placeholder="e.g. 8000">
+      <button type="button" onclick="calculateSalary()">Calculate take-home pay</button>
+      <div class="result" id="salary-result" aria-live="polite">Your result will appear here.</div>
+      <p class="note">Enter your total deductions yourself. This is an estimate, not an automatic calculation of Kenyan PAYE, NSSF, SHIF or other statutory deductions.</p>
+    </div>
+  </section>
 
-            <a href="#tools" class="primary-button">Explore tools →</a>
+  <section class="calculator-section alternate" id="loan">
+    <div class="calculator">
+      <span class="tag">BORROWING</span>
+      <h2>Loan Repayment Calculator</h2>
+      <p>Estimate repayments for a fixed-rate loan with monthly payments.</p>
+      <label for="loan-amount">Loan amount (KSh)</label>
+      <input id="loan-amount" type="number" min="0" step="0.01" placeholder="e.g. 100000">
+      <label for="loan-rate">Annual interest rate (%)</label>
+      <input id="loan-rate" type="number" min="0" step="0.01" placeholder="e.g. 12">
+      <label for="loan-years">Loan term (years)</label>
+      <input id="loan-years" type="number" min="0.1" max="100" step="0.1" placeholder="e.g. 3">
+      <button type="button" onclick="calculateLoan()">Calculate repayments</button>
+      <div class="result" id="loan-result" aria-live="polite">Your result will appear here.</div>
+      <p class="note">Estimate excludes fees, insurance and other lender charges. Actual terms may differ.</p>
+    </div>
+  </section>
 
-            <div class="hero-stats">
-                <div>
-                    <strong>Free</strong>
-                    <small>To use</small>
-                </div>
-                <div>
-                    <strong>Fast</strong>
-                    <small>Results</small>
-                </div>
-                <div>
-                    <strong>Online</strong>
-                    <small>Anywhere</small>
-                </div>
-            </div>
-        </section>
+  <section class="calculator-section" id="discount">
+    <div class="calculator">
+      <span class="tag">SHOPPING</span>
+      <h2>Discount Calculator</h2>
+      <p>Find the final price after a discount.</p>
+      <label for="original-price">Original price (KSh)</label>
+      <input id="original-price" type="number" min="0" step="0.01" placeholder="e.g. 2500">
+      <label for="discount-rate">Discount (%)</label>
+      <input id="discount-rate" type="number" min="0" max="100" step="0.01" placeholder="e.g. 20">
+      <button type="button" onclick="calculateDiscount()">Calculate discount</button>
+      <div class="result" id="discount-result" aria-live="polite">Your result will appear here.</div>
+    </div>
+  </section>
 
-        <section class="tools-section" id="tools">
-            <div class="section-heading">
-                <p class="eyebrow">OUR TOOLKIT</p>
-                <h2>What do you need today?</h2>
-                <p>Choose a tool and get your answer in seconds.</p>
-            </div>
+  <section class="calculator-section alternate" id="percentage">
+    <div class="calculator">
+      <span class="tag">MATHEMATICS</span>
+      <h2>Percentage Calculator</h2>
+      <p>Calculate what percentage of a number you need.</p>
+      <label for="percent">Percentage (%)</label>
+      <input id="percent" type="number" step="any" placeholder="e.g. 15">
+      <label for="number">Number</label>
+      <input id="number" type="number" step="any" placeholder="e.g. 800">
+      <button type="button" onclick="calculatePercentage()">Calculate percentage</button>
+      <div class="result" id="result" aria-live="polite">Your result will appear here.</div>
+    </div>
+  </section>
 
-            <div class="search-box">
-                <input
-                    type="search"
-                    id="toolSearch"
-                    placeholder="Search tools..."
-                    aria-label="Search tools"
-                >
-            </div>
+  <section class="calculator-section" id="word-counter">
+    <div class="calculator">
+      <span class="tag">WRITING</span>
+      <h2>Word Counter</h2>
+      <p>Type or paste text to count words and characters.</p>
+      <label for="text-input">Your text</label>
+      <textarea id="text-input" placeholder="Start typing or paste your text here..."></textarea>
+      <div class="count-grid">
+        <div class="count-box">Words<strong id="word-count">0</strong></div>
+        <div class="count-box">Characters<strong id="char-count">0</strong></div>
+      </div>
+      <button class="secondary-button" type="button" onclick="clearText()">Clear text</button>
+    </div>
+  </section>
 
-            <div class="tool-grid">
+  <section id="about" class="about">
+    <span class="tag">ABOUT DAILYUSEFUL</span>
+    <h2>Useful tools, without the hassle.</h2>
+    <p>DailyUseful brings everyday calculations into one simple place. Our goal is to make useful online tools accessible from any device.</p>
+  </section>
+</main>
 
-                <article class="tool-card" data-search="percentage calculator maths">
-                    <div class="tool-icon">%</div>
-                    <h3>Percentage Calculator</h3>
-                    <p>Calculate percentages and find what percentage one number is of another.</p>
-                    <button class="tool-button" data-tool="percentage">Open calculator →</button>
-                </article>
+<footer>
+  <p>© 2026 DailyUseful. All rights reserved.</p>
+  <p>Free online tools for everyday life.</p>
+  <p><a href="#about">About</a> · <a href="#tools">Calculators</a></p>
+</footer>
 
-                <article class="tool-card" data-search="word counter writing text characters">
-                    <div class="tool-icon">Aa</div>
-                    <h3>Word Counter</h3>
-                    <p>Count words, characters and sentences in your text instantly.</p>
-                    <button class="tool-button" data-tool="words">Open counter →</button>
-                </article>
-
-                <article class="tool-card" data-search="grade calculator marks average student">
-                    <div class="tool-icon">✓</div>
-                    <h3>Grade Calculator</h3>
-                    <p>Calculate your average marks from your subject scores.</p>
-                    <button class="tool-button" data-tool="grades">Open calculator →</button>
-                </article>
-
-            </div>
-        </section>
-
-        <section class="workspace" id="workspace" hidden>
-            <div class="workspace-heading">
-                <div>
-                    <p class="eyebrow">YOUR SELECTED TOOL</p>
-                    <h2 id="workspaceTitle">Calculator</h2>
-                </div>
-
-                <button id="closeTool" class="close-button">Close ×</button>
-            </div>
-
-            <div id="percentageTool" class="tool-panel" hidden>
-                <h3>Find a percentage</h3>
-
-                <label for="percentageValue">Percentage (%)</label>
-                <input type="number" id="percentageValue" placeholder="e.g. 15">
-
-                <label for="percentageNumber">Number</label>
-                <input type="number" id="percentageNumber" placeholder="e.g. 200">
-
-                <button id="calculatePercentage" class="primary-button">Calculate</button>
-                <p id="percentageResult" class="result" aria-live="polite"></p>
-
-                <hr>
-
-                <h3>Find what percentage one number is of another</h3>
-
-                <label for="partValue">Part</label>
-                <input type="number" id="partValue" placeholder="e.g. 25">
-
-                <label for="totalValue">Total</label>
-                <input type="number" id="totalValue" placeholder="e.g. 100">
-
-                <button id="calculatePart" class="primary-button">Calculate percentage</button>
-                <p id="partResult" class="result" aria-live="polite"></p>
-            </div>
-
-            <div id="wordsTool" class="tool-panel" hidden>
-                <h3>Enter or paste your text</h3>
-
-                <textarea id="wordText" rows="8"
-                    placeholder="Start typing or paste your text here..."></textarea>
-
-                <div class="counter-grid">
-                    <div class="counter-item">
-                        <strong id="wordCount">0</strong>
-                        <span>Words</span>
-                    </div>
-
-                    <div class="counter-item">
-                        <strong id="characterCount">0</strong>
-                        <span>Characters</span>
-                    </div>
-
-                    <div class="counter-item">
-                        <strong id="sentenceCount">0</strong>
-                        <span>Sentences</span>
-                    </div>
-                </div>
-
-                <button id="clearText" class="secondary-button">Clear text</button>
-            </div>
-
-            <div id="gradesTool" class="tool-panel" hidden>
-                <h3>Calculate your average</h3>
-                <p>Enter your marks below. Each subject is weighted equally.</p>
-
-                <div id="subjectList">
-                    <div class="subject-row">
-                        <label for="subject1">Subject 1 mark (%)</label>
-                        <input id="subject1" class="subject-mark" type="number"
-                            min="0" max="100" placeholder="e.g. 75">
-                    </div>
-
-                    <div class="subject-row">
-                        <label for="subject2">Subject 2 mark (%)</label>
-                        <input id="subject2" class="subject-mark" type="number"
-                            min="0" max="100" placeholder="e.g. 80">
-                    </div>
-
-                    <div class="subject-row">
-                        <label for="subject3">Subject 3 mark (%)</label>
-                        <input id="subject3" class="subject-mark" type="number"
-                            min="0" max="100" placeholder="e.g. 65">
-                    </div>
-                </div>
-
-                <button id="calculateGrade" class="primary-button">Calculate average</button>
-                <p id="gradeResult" class="result" aria-live="polite"></p>
-            </div>
-        </section>
-
-        <section class="about-section" id="about">
-            <p class="eyebrow">ABOUT EVERYDAYTOOLS</p>
-            <h2>Useful tools for everyday life.</h2>
-            <p>
-                Our goal is to make common tasks easier with simple,
-                accessible tools that work on computers, tablets and phones.
-            </p>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <a href="#" class="logo">Everyday<span>Tools</span></a>
-        <p>Simple tools to make everyday tasks easier.</p>
-        <p>© <span id="currentYear"></span> EverydayTools</p>
-    </footer>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
+           
